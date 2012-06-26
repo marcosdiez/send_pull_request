@@ -1,12 +1,22 @@
 send_pull_request
 =================
 
-Simple script that sends pull request thought the command line
+Simple way to sends pull request from the command line. Usage:
 
-Licence: MIT
+    $ ./send_pull_request.sh YOUR_BRANCH TARGET_REPO_OWNER \[PULL_REQUEST_TITLE\] \[PULL_REQUEST_BODY\] \[TARGET_REPO_BRANCH\]
 
-usage: ./send_pull_request.sh YOUR_BRANCH TARGET_REPO_OWNER [PULL_REQUEST_TITLE] [PULL_REQUEST_BODY] [TARGET_REPO_BRANCH]
-if not specified, PULL_REQUEST_TITLE will be YOUR_BRANCH
-if not specified, PULL_REQUEST_BODY  will be blank
-if not specified, TARGET_REPO_BRANCH will be master
+PULL_REQUEST_TITLE defaults to current branch
 
+PULL_REQUEST_BODY will be blank if not specified
+
+TARGET_REPO_BRANCH defaults to master
+
+
+Meta
+----
+
+Created by Marcos Diez
+
+Released under the MIT License: http://www.opensource.org/licenses/mit-license.php
+
+https://github.com/marcosdiez/send_pull_request

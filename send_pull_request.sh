@@ -23,7 +23,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
-if [ -z $2 ]
+if [ -z "$2" ]
 then
     echo "usage: $0 YOUR_BRANCH TARGET_REPO_OWNER [PULL_REQUEST_TITLE] [PULL_REQUEST_BODY] [TARGET_REPO_BRANCH]"
     echo "if not specified, PULL_REQUEST_TITLE will be YOUR_BRANCH"
@@ -32,25 +32,25 @@ then
     exit
 fi
 
-if [ -z $5 ]
+if [ -z "$5" ]
 then
     TARGET_REPO_BRANCH="master"
 else
-    TARGET_REPO_BRANCH=$5
+    TARGET_REPO_BRANCH="$5"
 fi
 
-if [ -z $4 ]
+if [ -z "$4" ]
 then
     PULL_REQUEST_BODY=""
 else
-    PULL_REQUEST_BODY=$4
+    PULL_REQUEST_BODY="$4"
 fi
 
-if [ -z $3 ]
+if [ -z "$3" ]
 then
-    PULL_REQUEST_TITLE=$1
+    PULL_REQUEST_TITLE="$1"
 else
-    PULL_REQUEST_TITLE=$3
+    PULL_REQUEST_TITLE="$3"
 fi
 
 #todo GET /repos/:user/:repo in order to get TARGET_REPO_OWNER automatically

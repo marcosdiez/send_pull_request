@@ -23,9 +23,9 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
-if [ -z "$1" ]
+if [  "$1" == "--help" ]
 then
-    echo "usage: $0 YOUR_BRANCH TARGET_REPO_OWNER [PULL_REQUEST_TITLE] [PULL_REQUEST_BODY] [TARGET_REPO_BRANCH]"
+    echo "usage: $0 [YOUR_BRANCH] [TARGET_REPO_OWNER] [PULL_REQUEST_TITLE] [PULL_REQUEST_BODY] [TARGET_REPO_BRANCH]"
     echo "if not specified, TARGET_REPO_OWNER will be the default from GitHub"
     echo "if not specified, PULL_REQUEST_TITLE will be YOUR_BRANCH"
     echo "if not specified, PULL_REQUEST_BODY  will be blank"
@@ -54,9 +54,16 @@ else
     PULL_REQUEST_TITLE="$3"
 fi
 
+if [ -z "$1" ]
+    then
+    YOUR_BRANCH=$(git symbolic-ref --short -q HEAD)
+else
+    YOUR_BRANCH=$1  # `git status |head -n 1  | cut -d" " -f4`
+fi
+
 
 TARGET_REPO_OWNER=$2
-YOUR_BRANCH=$1  # `git status |head -n 1  | cut -d" " -f4`
+
 
 LOGIN=`git config --get remote.origin.url |cut -d ":" -f2 | cut -d "/" -f 1`
 REPOSITORY=`git config --get remote.origin.url |cut -d ":" -f2 | cut -d "/" -f 2 | cut -d "." -f  1`

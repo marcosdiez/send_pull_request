@@ -3,7 +3,11 @@ send_pull_request
 
 Simple way to sends pull request from the command line. Usage:
 
-    $ ./send_pull_request.sh YOUR_BRANCH [TARGET_REPO_OWNER] [TITLE] [BODY] [TARGET_REPO_BRANCH]
+    $ ./send_pull_request.sh [YOUR_BRANCH] [TARGET_REPO_OWNER] [TITLE] [BODY] [TARGET_REPO_BRANCH]
+
+YOUR_BRANCH defaults to the current branch
+
+TARGET_REPO_OWNER defaults to where you PR came from
 
 TITLE defaults to current branch
 

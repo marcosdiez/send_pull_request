@@ -47,13 +47,6 @@ else
     PULL_REQUEST_BODY="$4"
 fi
 
-if [ -z "$3" ]
-then
-    PULL_REQUEST_TITLE="$1"
-else
-    PULL_REQUEST_TITLE="$3"
-fi
-
 if [ -z "$1" ]
     then
     YOUR_BRANCH=$(git symbolic-ref --short -q HEAD)
@@ -61,8 +54,16 @@ else
     YOUR_BRANCH=$1  # `git status |head -n 1  | cut -d" " -f4`
 fi
 
+if [ -z "$3" ]
+then
+    PULL_REQUEST_TITLE="$YOUR_BRANCH"
+else
+    PULL_REQUEST_TITLE="$3"
+fi
 
-TARGET_REPO_OWNER=$2
+
+
+TARGET_REPO_OWNER="$2"
 
 
 LOGIN=`git config --get remote.origin.url |cut -d ":" -f2 | cut -d "/" -f 1`
@@ -82,6 +83,7 @@ if [ -z "$2" ]
     TARGET_REPO_OWNER=`curl -u ${AUTH} "https://api.github.com/repos/${LOGIN}/${REPOSITORY}" | grep -A 50 "parent" | grep login | head -n 1 | cut -d'"' -f4`
     echo "TARGET_REPO_OWNER=${TARGET_REPO_OWNER}"
 fi
+echo curl -u ${LOGIN}":xxxxxxxxxx" "https://api.github.com/repos/${TARGET_REPO_OWNER}/${REPOSITORY}/pulls" --data "{ \"title\":\"${PULL_REQUEST_TITLE}\" , \"body\":\"${PULL_REQUEST_BODY}\" , \"head\":\"${LOGIN}:${YOUR_BRANCH}\" , \"base\": \"${TARGET_REPO_BRANCH}\"  }"
 curl -u ${AUTH} "https://api.github.com/repos/${TARGET_REPO_OWNER}/${REPOSITORY}/pulls" --data "{ \"title\":\"${PULL_REQUEST_TITLE}\" , \"body\":\"${PULL_REQUEST_BODY}\" , \"head\":\"${LOGIN}:${YOUR_BRANCH}\" , \"base\": \"${TARGET_REPO_BRANCH}\"  }"
 
 
